@@ -1,0 +1,22 @@
+
+### 資料夾介紹 ###
+
+data:           存放每個城市的.txt，.txt中會有每一張影像的path.
+logfiles:       存放training中print出來的資訊.
+models:         存放每一種方法所使用的CNN model，每個model都是基於dilation FCN去修改的.
+pretrained:     存放已事先用Cityscapes的data所train好的weight.
+scripts:        .sh檔都放在這，要train或是test，都有已經寫好的script可以直接跑.
+tools:          完整的train和test的code都放在這
+trained_weight: train好的weight會存放在這.
+train_results:  根據trained_weight所test出來的結果會放在這，後續會拿來做evaluation.
+
+### Usage ###
+
+# Inferencing
+./scripts/infer.sh
+
+# Training(for GA, GACA and FullMethod)
+./script/train.sh
+
+# Training(for active learning)
+./script/train_active.sh 
