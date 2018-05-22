@@ -27,4 +27,4 @@ Some useful Domain adaptation code
 
 - [GTA5 Dataset](https://download.visinf.tu-darmstadt.de/data/from_games/ "GTA5 Dataset")
 
-- [https://www.cityscapes-dataset.com/](https://www.cityscapes-dataset.com/ "Cityscapes Dataset")
+- [Cityscapes Dataset](https://www.cityscapes-dataset.com/)
