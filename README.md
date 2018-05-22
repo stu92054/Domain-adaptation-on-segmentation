@@ -2,14 +2,14 @@
 
 Some useful Domain adaptation code
 
-> This repository collect some useful code fun others. So you can use them esily.
+> This repository collect some useful code fun others. And we will implement them in the future. So you can use them easily.
 
 
 ----------
 **Learning to Adapt Structured Output Space for Semantic Segmentation**
 
-- paperlink:[https://arxiv.org/abs/1802.10349](https://arxiv.org/abs/1802.10349)
-- codelink:[https://github.com/wasidennis/AdaptSegNet](https://github.com/wasidennis/AdaptSegNet)
+- paper link:[https://arxiv.org/abs/1802.10349](https://arxiv.org/abs/1802.10349)
+- code link:[https://github.com/wasidennis/AdaptSegNet](https://github.com/wasidennis/AdaptSegNet)
 
 **No More Discrimination: Cross City Adaptation of Road Scene Segmenters**
 
