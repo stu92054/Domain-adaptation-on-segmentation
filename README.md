@@ -8,19 +8,19 @@ Some useful Domain adaptation code
 ----------
 **Learning to Adapt Structured Output Space for Semantic Segmentation**
 
-- paper link:[https://arxiv.org/abs/1802.10349](https://arxiv.org/abs/1802.10349)
-- code link:[https://github.com/wasidennis/AdaptSegNet](https://github.com/wasidennis/AdaptSegNet)
+- paper link: [https://arxiv.org/abs/1802.10349](https://arxiv.org/abs/1802.10349)
+- code link: [https://github.com/wasidennis/AdaptSegNet](https://github.com/wasidennis/AdaptSegNet)
 
 **No More Discrimination: Cross City Adaptation of Road Scene Segmenters**
 
-- paper link:[https://arxiv.org/abs/1704.08509](https://arxiv.org/abs/1704.08509)
-- code link:
+- paper link: [https://arxiv.org/abs/1704.08509](https://arxiv.org/abs/1704.08509)
+- code link: will be provided soon
 
 
 **FCNs in the Wild: Pixel-level Adversarial and Constraint-based Adaptation**
 
-- paper link:[https://arxiv.org/abs/1612.02649](https://arxiv.org/abs/1612.02649)
-- code link:
+- paper link: [https://arxiv.org/abs/1612.02649](https://arxiv.org/abs/1612.02649)
+- code link: will be provided soon
 
 
 ## Dataset ##
