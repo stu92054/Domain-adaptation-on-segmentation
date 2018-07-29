@@ -22,7 +22,6 @@ pip install -r requirements.txt
 	* download the subset "SYNTHIA-RAND-CITYSCAPES" 
 * Download [Our Dataset](https://yihsinchen.github.io/segmentation_adaptation/#Dataset)
 	* contains four subsets --- Taipei, Tokyo, Roma, Rio --- used as target domain (only testing data has annotations) 
-
 * Check data root-path in datasets.py
  
 ### Testing
