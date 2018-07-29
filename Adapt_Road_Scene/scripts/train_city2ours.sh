@@ -1,15 +1,14 @@
 python -u ./tools/train_adv.py \
---weight_path ./pretrained/my_frontend_16200.npy \
+--weight_path ./pretrained/train_cscape_frontend.npy \
 --city Taipei \
 --src_data_path ./data/Cityscapes.txt \
 --tgt_data_path ./data/Taipei.txt \
---method GACA \
---batch_size 2 \
+--method FullMethod \
+--batch_size 8 \
 --iter_size 4 \
---max_step 12000 \
---save_step 1000 \
+--start_step 0 \
+--max_step 3000 \
+--save_step 400 \
 --train_dir ./trained_weights/ \
---gpu 3 \
+--gpu 5,6 \
 2>&1 | tee ./logfiles/Taipei_FullMethod.log
-#--method FullMethod \
-#--restore_path './trained_weights/GA/Taipei/model-2000' \

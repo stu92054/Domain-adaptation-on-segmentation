@@ -28,7 +28,6 @@ from __future__ import print_function
 import os, sys
 import platform
 import fnmatch
-import pdb
 import argparse
 
 ### input argument ###
@@ -94,7 +93,6 @@ def getPrediction( args, groundTruthFile ):
             rootPath = args_.pd
         if not os.path.isdir(rootPath):
             printError("Could not find a result root folder. Please read the instructions of this method.")
-
         args.predictionPath = rootPath
     # walk the prediction path, if not happened yet
     if not args.predictionWalk:
@@ -104,7 +102,11 @@ def getPrediction( args, groundTruthFile ):
         args.predictionWalk = walk
 
     csFile = getCsFileInfo(groundTruthFile)
-    filePattern = "{}_{}_{}_{}*.png".format( csFile.city , csFile.sequenceNb , csFile.frameNb , csFile.frameNbb)
+    if 'syn2real' in args_.pd:
+        #filePattern = "{}*.png".format( csFile.city)
+        filePattern = "{}_{}_{}_leftImg8bit.png".format( csFile.city , csFile.sequenceNb , csFile.frameNb)#  , csFile.frameNbb)
+    else:    
+        filePattern = "{}_{}_{}_{}.png".format( csFile.city , csFile.sequenceNb , csFile.frameNb, csFile.frameNbb)
 
     predictionFile = None
     for root, filenames in args.predictionWalk:
@@ -140,7 +142,12 @@ else:
 # Parameters that should be modified by user
 args.exportFile         = os.path.join( args.cityscapesPath , "evaluationResults" , "resultPixelLevelSemanticLabeling.json" )
 #args.groundTruthSearch  = os.path.join( args.cityscapesPath , "gtFine" , "val" , "*", "*_gtFine_labelIds.png" )
-args.groundTruthSearch  = os.path.join( args_.gt+'/*_eval.png' )
+if 'syn2real' in args_.pd:
+    args.groundTruthSearch  = os.path.join( args_.gt.replace('syn2real','')+'/*/*_gtFine_labelIds.png' )
+    #args.groundTruthSearch  = os.path.join( args_.gt.replace('syn2real','')+'/evalid_512/*.png' )
+else:
+    args.groundTruthSearch  = os.path.join( args_.gt+'/*_eval.png' )
+
 # Remaining params
 args.evalInstLevelScore = False
 args.evalPixelAccuracy  = False
@@ -565,7 +572,6 @@ def evaluatePair(predictionImgFileName, groundTruthImgFileName, confMatrix, inst
     try:
         groundTruthImg = Image.open(groundTruthImgFileName)
         groundTruthNp = np.array(groundTruthImg)
-        #pdb.set_trace()    
     except:
         printError("Unable to load " + groundTruthImgFileName)
     # load ground truth instances, if needed
@@ -677,11 +683,9 @@ def main(argv):
             printError("Cannot find any ground truth images to use for evaluation. Searched for: {}".format(args.groundTruthSearch))
         # get the corresponding prediction for each ground truth imag
         for gt in groundTruthImgList:
-        #pdb.set_trace()
             predictionImgList.append( getPrediction(args,gt) )
 
     # evaluate
-    #pdb.set_trace()    
     evaluateImgLists(predictionImgList, groundTruthImgList, args)
 
     return

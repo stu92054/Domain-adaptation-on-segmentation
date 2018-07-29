@@ -3,14 +3,13 @@ from __future__ import division
 from __future__ import print_function
 import os.path
 import tensorflow as tf
-import pdb
 import numpy as np
 import cv2
 import pickle
 
 class Reader(object):
     
-    def __init__(self, src_data_path, tgt_data_path, batch_size = 64, suffle=True):
+    def __init__(self, src_data_path, tgt_data_path, input_width=1024, input_height=512, batch_size = 64, suffle=True):
         
         assert batch_size % 2 == 0, 'batch_size must be a multiple of 2!'
         
@@ -24,6 +23,8 @@ class Reader(object):
         self.tgt_ind = np.arange(len(self.tgt_images))
         self.src_step = 0
         self.tgt_step = 0
+        self.IMG_W = input_width
+        self.IMG_H = input_height
         self.batch_size = batch_size
         self.shuffle = True
     
@@ -80,14 +81,14 @@ class Reader(object):
             
             # load the static-prior file
             tgt_static_prior_path = self.tgt_images[tgt_ind_this_batch[i]].split('.')[0] + '_static.pkl'
-            pdb.set_trace()
+            
             with open(tgt_static_prior_path, 'rb') as f:
                 try:
                     tgt_static_prior = pickle.load(f)
                 except:
                     print ('Fail to load file from %s' % tgt_static_prior_path)
                         
-            tgt_static_prior = cv2.resize(tgt_static_prior.astype(np.uint8), (512, 256), interpolation=cv2.INTER_NEAREST)
+            tgt_static_prior = cv2.resize(tgt_static_prior.astype(np.uint8), (self.IMG_W, self.IMG_H), interpolation=cv2.INTER_NEAREST)
             tgt_static_prior = tgt_static_prior[:,:,np.newaxis]
             tgt_images_this_batch.append(tgt_image)
             tgt_labels_this_batch.append(tgt_label)
@@ -118,7 +119,6 @@ def main(argv = None):
     reader = Reader('data/Cityscapes.txt', 'data/Taipei.txt', batch_size = 8)
     for i in range(100):
         A,B,C,D = reader.next_train()
-        pdb.set_trace()
 if __name__ == '__main__':
     # tf.app.run()
     main()

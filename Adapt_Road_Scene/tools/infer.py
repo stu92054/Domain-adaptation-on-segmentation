@@ -8,7 +8,6 @@ import cv2
 import skimage
 import skimage.io
 import tensorflow as tf
-import pdb
 
 model_path = './models/'
 sys.path.insert(0, model_path)
@@ -17,13 +16,15 @@ from model import FCN8VGG
 parser = argparse.ArgumentParser()
 parser.add_argument('--eval_script', type=str, required=True)
 parser.add_argument('--city', type=str, required=True)
-parser.add_argument('--load_npy', type=int, required=True)
 parser.add_argument('--pretrained_weight', type=str, required=True)
 parser.add_argument('--method', type=str, required=True)
-parser.add_argument('--img_dir', type=str, required=True)
+parser.add_argument('--img_dir', type=str, required=False)
+parser.add_argument('--img_path_file', type=str, required=False)
 parser.add_argument('--weights_dir', type=str, required=False)
 parser.add_argument('--output_dir', type=str, required=True)
 parser.add_argument('--gt_dir', type=str, required=True)
+parser.add_argument('--input_width', type=int, default=512)
+parser.add_argument('--input_height', type=int, default=256)
 parser.add_argument('--_format', type=str, required=True)
 parser.add_argument('--gpu', type=str, required=True)
 parser.add_argument('--iter_lower', type=int, required=False)
@@ -32,15 +33,20 @@ args= parser.parse_args()
 
 os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
 
-if args.load_npy:
-    assert args.method == 'pretrained', "If pretrained is '1', then the method must be 'pretrained'. "
-    print ('Evaluate the model using the pre-trained weight')
+#if args.load_npy:
+#    assert args.method == 'pretrained', "If pretrained is '1', then the method must be 'pretrained'. "
+#    print ('Evaluate the model using the pre-trained weight')
 
-else: 
-    assert args.method != 'pretrained', "If pretrained is '0', then the method will be 'GA', 'GACA' or 'Full_method'. "
+#else: 
+#assert args.method != 'pretrained', "If pretrained is '0', then the method will be 'GA', 'GACA' or 'Full_method'. "
+assert args.img_path_file != None or args.img_dir != None, "At least one input way should be given."
+use_pretrained = True
+if args.method != 'pretrained':
+    use_pretrained = False
     assert args.weights_dir != None, "If pretrained is '0', then the 'weights_dir' must be given according the specific method. "
     assert args.iter_upper >= args.iter_lower and args.iter_lower >= 0, "iter_lower must be larger than iter_upper"
 
+        
     if args.iter_lower == args.iter_upper:
         print ('Evaluate the model at iteration %d...' % (args.iter_lower))
     elif args.iter_upper > args.iter_lower:
@@ -99,6 +105,22 @@ def generate_image_list( data_path):
     
     """
     image_list = []
+    f = open(data_path,'r')
+    for line in f:
+        image_list.append(line.split('\n')[0])
+        #image_list.append(line.split(' ')[0])
+    return image_list
+
+def generate_image_list_v2( data_path):
+    """
+    Args:
+        data_path: A folder contains all the images.
+
+    Returns:
+        A list which which has the individual path of all the images.  
+    
+    """
+    image_list = []
     for file in os.listdir(data_path):
         image_list.append(os.path.join(data_path, file))
     return image_list
@@ -150,10 +172,11 @@ def predict(image_list, _pretrained, output_visualize_dir, output_eval_dir, weig
         saver.restore( sess, weight_path)
     
     for i in range( len( image_list)):
-        print( image_list[i])
-        print "i=", i
+        #print( image_list[i])
+        #print "i=", i
 
         img = skimage.io.imread( image_list[i])
+        img = cv2.resize(img, (args.input_width, args.input_height))
         img = np.expand_dims( img, axis=0)
         feed_dict = { model.rgb: img}
         predict_label = sess.run( [ model.pred_up], feed_dict = feed_dict)
@@ -222,18 +245,21 @@ def evaluation(eval_script, gt_dir, output_dir):
 
 if __name__ == '__main__': 
    
-    image_path = os.path.join(args.img_dir, args.city)  
+    if args.img_dir != None:
+        image_path = os.path.join(args.img_dir, args.city)  
     gt_city_dir = os.path.join(args.gt_dir, args.city) 
-
-    image_list = generate_image_list(image_path)
     
-    if args.load_npy:
+    if args.img_path_file != None:
+        image_list = generate_image_list(args.img_path_file)
+    else:
+        image_list = generate_image_list_v2(image_path)
+    
+    if use_pretrained:
         output_visualize_dir = os.path.join(args.output_dir, args.method, args.city, 'visualize')
         output_eval_dir = os.path.join(args.output_dir, args.method, args.city, 'eval')
-        predict( image_list, args.load_npy, 
+        predict( image_list, use_pretrained, 
                      output_visualize_dir, output_eval_dir)
         
-        pdb.set_trace()
         evaluation( args.eval_script, gt_city_dir, output_eval_dir)
         print 'The above results are calculated by using the pre-trained model'
 
@@ -248,7 +274,7 @@ if __name__ == '__main__':
             output_visualize_dir = os.path.join(args.output_dir, args.method, args.city, 'iter_'+iteration, 'visualize')
             output_eval_dir = os.path.join(args.output_dir, args.method, args.city, 'iter_'+ iteration, 'eval')
                 
-            predict(image_list, args.load_npy, output_visualize_dir, output_eval_dir, weight_path) 
+            predict(image_list, use_pretrained, output_visualize_dir, output_eval_dir, weight_path) 
             
             evaluation( args.eval_script, gt_city_dir, output_eval_dir)
             print 'The above results are calculated by using the model @ iteration %s' % iteration

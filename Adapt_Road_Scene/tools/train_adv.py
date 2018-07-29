@@ -4,8 +4,6 @@ import time
 from datetime import datetime
 import numpy as np
 import os
-
-import pdb
 import argparse
 
 parser = argparse.ArgumentParser()
@@ -17,8 +15,11 @@ parser.add_argument('--method', type=str, default='GA')
 parser.add_argument('--batch_size', type=int, required=True)
 parser.add_argument('--iter_size', type=int, required=True)
 parser.add_argument('--max_step', type=int, required=True)
+parser.add_argument('--start_step', type=int, default=0)
 parser.add_argument('--save_step', type=int, required=True)
 parser.add_argument('--train_dir', type=str, default='./trained_weight/')
+parser.add_argument('--input_width', type=int, default=512)
+parser.add_argument('--input_height', type=int, default=256)
 parser.add_argument('--gpu', type=str, default='0')
 parser.add_argument('--restore_path', type=str, required=False)
 parser.add_argument('--write_summary', type=bool, default=False)
@@ -33,7 +34,10 @@ batch_size = args.batch_size
 iter_size = args.iter_size
 save_step = args.save_step
 max_step = args.max_step
+start_step = args.start_step
 train_dir = args.train_dir
+input_width = args.input_width
+input_height = args.input_height
 restore_path = args.restore_path
 train_method_city_dir = train_dir + method+ '/'+ city + '/'
 
@@ -70,12 +74,10 @@ if not os.path.isdir('./logfiles/'):
     os.mkdir('./logfiles/')
 
 assert iter_size > 1, 'iter_size should be larger than 1!' 
-assert city in ['Taipei', 'Roma', 'Tokyo', 'Rio', 'Denmark'], 'Please check the city name!'
+assert city in ['Taipei', 'Roma', 'Tokyo', 'Rio', 'Denmark','syn2real'], 'Please check the city name!'
 assert method in ['GA', 'GACA', 'FullMethod'], 'Please check the method name!'
-#if method == 'GACA' or method == 'FullMethod':
-#    assert restore_path != None, "Please add the argument 'restore path'!"
 
-reader = Reader(src_data_path, tgt_data_path, batch_size = batch_size)
+reader = Reader(src_data_path, tgt_data_path, input_width=input_width, input_height=input_height, batch_size = batch_size)
 model = FCN8VGG(weight_path)
 os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
 
@@ -91,7 +93,7 @@ def train():
     with tf.Graph().as_default():
         
         with tf.device('/gpu:0'):
-            model.build(batch_size=batch_size,
+            model.build(batch_size=batch_size,input_w=input_width, input_h=input_height,
                         train=True, num_classes=19, city=city, 
                         random_init_fc8=False, random_init_adnn=True, debug=True)
         
@@ -294,14 +296,19 @@ def train():
         tf.global_variables_initializer().run(session = sess)
         if args.write_summary:
             summary_writer = tf.summary.FileWriter(train_method_city_dir, sess.graph)
-        saver = tf.train.Saver(tf.all_variables(), max_to_keep = max_step/save_step)
 
         if restore_path != None:
-            saver.restore(sess, restore_path)
+            if not start_step:
+                variables_to_restore = [v for v in tf.all_variables() if 'Adam' not in v.name and ('feature_extractor' in v.name or 'label_predictor' in v.name)] 
+                saver = tf.train.Saver(variables_to_restore)#, max_to_keep = max_step/save_step)
+                saver.restore(sess, restore_path)
+            else:
+                saver = tf.train.Saver(tf.all_variables(), max_to_keep=5)#, max_to_keep = max_step/save_step)
+                saver.restore(sess, restore_path)
             print('Load model weight from: %s' % restore_path)
         
         print('start to run!!') 
-        for step in range(max_step):
+        for step in range(start_step, max_step):
             
             _mode = 0
             if step % iter_size == 0:
@@ -324,10 +331,10 @@ def train():
             # calculate the weighting of learning rate for feature extractor (f) / domain classifier (d)
             # GA stands for global alignment, CA stands for classwise alignment
             GA_d_weighting = 10.0
-            GA_f_weighting = (2. / (1. + np.exp(-10. * float(step)/1200.)) - 1.) * 0.05
+            GA_f_weighting = (2. / (1. + np.exp(-10. * float(step)/1200.)) - 1.) * 0.05 # cscape2ours
             
             CA_d_weighting = 20.0
-            CA_f_weighting = (2. / (1. + np.exp(-4. * float(step-1000)/1200.)) - 1.) * 0.05 * 5.
+            CA_f_weighting = (2. / (1. + np.exp(-10. * float(step-1000)/1200.)) - 1.) * 0.05 
             CA_f_weighting = CA_f_weighting.clip(0.)
             
             if _CW_Alignment and step >= 1000:
@@ -346,7 +353,7 @@ def train():
                                                                    model.domain_labels: domain_labels,
                                                                    lr: _lr,
                                                                    mode: _mode})
-           
+            # if method ==FullMethod, need additional input: static_priors 
             elif method == 'FullMethod':
                 _, _task_loss, _task_accur = sess.run([train_op_task, task_loss, task_accur],
                                                       feed_dict = {model.rgb: images,
@@ -396,7 +403,7 @@ def train():
 
             if _run_CA: 
                 if method == 'GA' or method == 'GACA':
-                    _, _CA_loss, _CA_accur, _by_cls_accur = sess.run([etrain_op_CA, CA_domain_loss, CA_domain_accur, model.CA_domain_accur_by_cls],
+                    _, _CA_loss, _CA_accur, _by_cls_accur = sess.run([train_op_CA, CA_domain_loss, CA_domain_accur, model.CA_domain_accur_by_cls],
                                                        feed_dict = {model.rgb: images,
                                                                     model.task_labels: task_labels,
                                                                     model.domain_labels: domain_labels,

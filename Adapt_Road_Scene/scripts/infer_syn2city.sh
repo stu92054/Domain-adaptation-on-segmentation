@@ -1,0 +1,13 @@
+python ./tools/infer.py \
+ --img_path_file ./data/cscape_val.txt \
+ --eval_script ./tools/cityscapesscripts/evaluation/evalPixelLevelSemanticLabeling.py \
+ --city syn2real \
+ --method GACA \
+ --pretrained_weight ./pretrained/pretrained_vgg.npy \
+ --gt_dir xxx/gtFine/val/ \
+ --output_dir ./train_results/ \
+ --weights_dir ./trained_weights/ \
+ --_format 'model' \
+ --gpu 0 \
+ --iter_lower 6000 \
+ --iter_upper 10000

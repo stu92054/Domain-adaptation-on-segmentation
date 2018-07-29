@@ -9,7 +9,6 @@ import logging
 import sys
 import numpy as np
 import tensorflow as tf
-import pdb
 
 
 # in BGR order
@@ -18,7 +17,8 @@ DataSet_Mean = {'Taipei':[104.03, 104.93, 103.30],
                 'Denmark':[126.77, 130.34, 127.37],
                 'Roma':[113.44, 115.97, 114.38],
                 'Rio':[115.81, 118.83, 116.11],
-                'Cityscapes':[72.39, 82.91, 73.16]}
+                'Cityscapes':[72.39, 82.91, 73.16],
+                'Synthia':[63.31, 70.81, 80.35]}
 
 class FCN8VGG:
     def __init__(self, vgg16_npy_path=None):
@@ -37,16 +37,19 @@ class FCN8VGG:
         print("npy file loaded")
     
     #def build(self, rgb, task_labels, domain_label, batch_size, train=False, num_classes=19, city='Taipei', 
-    def build(self, batch_size, train=False, num_classes=19, city='Taipei', 
+    def build(self, batch_size, input_w=1024, input_h=512, train=False, num_classes=19, city='Taipei', 
               random_init_fc8=False, random_init_adnn=False, debug=False):
         
-        src_mean = DataSet_Mean['Cityscapes']
-        tgt_mean = DataSet_Mean[city]
-
-        self.rgb = tf.placeholder(tf.int32, shape = [batch_size, 256, 512, 3], name = 'rgb')
-        self.task_labels = tf.placeholder(tf.float32, shape = [batch_size, 256, 512, 1], name = 'task_labels') 
+        if city=="syn2real":
+            src_mean = DataSet_Mean['Synthia']
+            tgt_mean = DataSet_Mean['Cityscapes']
+        else:
+            src_mean = DataSet_Mean['Cityscapes']
+            tgt_mean = DataSet_Mean[city]
+        self.rgb = tf.placeholder(tf.int32, shape = [batch_size, input_h, input_w, 3], name = 'rgb')
+        self.task_labels = tf.placeholder(tf.float32, shape = [batch_size, input_h, input_w, 1], name = 'task_labels') 
         
-        self.domain_labels = tf.placeholder(tf.float32, shape = [batch_size, 32, 64, 1], name = 'domain_labels')
+        self.domain_labels = tf.placeholder(tf.float32, shape = [batch_size, int(input_h/8), int(input_w/8), 1], name = 'domain_labels')
         domain_label = tf.cast(tf.squeeze(self.domain_labels, [3]), tf.int32)
         # Convert RGB to BGR
         with tf.name_scope('Processing'):
@@ -593,12 +596,7 @@ class FCN8VGG:
         print('Layer name: %s' % name)
         print('Layer shape: %s' % shape)
         weights = self.data_dict[name][0]
-        #pdb.set_trace()
-        #if((name!='fc7') and (name!='final')):
         weights = weights.reshape(shape)
-        #if num_classes is not None:
-        #    weights = self._summary_reshape(weights, shape,
-        #                                    num_new=num_classes)
         init = tf.constant_initializer(value=weights,
                                        dtype=tf.float32)
         var = tf.get_variable(name="weights", initializer=init, shape=shape)
