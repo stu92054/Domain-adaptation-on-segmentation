@@ -22,7 +22,7 @@ pip install -r requirements.txt
 	* download the subset "SYNTHIA-RAND-CITYSCAPES" 
 * Download [Our Dataset](https://yihsinchen.github.io/segmentation_adaptation/#Dataset)
 	* contains four subsets --- Taipei, Tokyo, Roma, Rio --- used as target domain (only testing data has annotations) 
-* Check data root-path in datasets.py
+* Check data-root-path in datasets.py
  
 ### Testing
 Download the trained model (synthia-to-cityscapes w. dilated-ResNet @60-epoch):
@@ -32,7 +32,7 @@ $ cd MCD_DA_seg
 $ sh download.sh
 ```
 
-###### Testing: 
+##### Infer the model: 
 
 ```
 python adapt_tester.py city ./train_output/synthia-train2city-train_3ch/pth/MCD-normal-drn_d_105-res50-60.pth.tar
@@ -42,7 +42,7 @@ python adapt_tester.py city ./train_output/synthia-train2city-train_3ch/pth/MCD-
 
 Results will be saved under "./test_output/synthia-train2city-train_3ch---city-val/MCD-normal-drn_d_105-res50-60.tar"
 
-###### Evaluation:
+##### Evaluation:
 We replace the original evaluation code with the script provided by Cityscapes-Dataset. (use "run_eval.sh")
 
 ```
