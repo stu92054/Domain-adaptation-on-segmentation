@@ -15,7 +15,7 @@ Tensorflow implementation of the paper for adapting semantic segmentation from t
 	cd build
 	cmake ..
 	make -j8
-```
+	```
 
 ## Dataset
 
@@ -49,7 +49,7 @@ Tensorflow implementation of the paper for adapting semantic segmentation from t
 		--src_data_path ./data/Cityscapes.txt \
 		--tgt_data_path ./data/{city_name}.txt \
 		--method GACA \
-```
+	```
 
 
 	The training scripts for adapt from (A) Synthia dataset to Cityscapes dataset and (B) Cityscapes dataset to Our dataset are prepared in "scripts/run_train_syn2city.sh" and "scripts/run_train_city2ours.sh". 
