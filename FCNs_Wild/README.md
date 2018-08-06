@@ -30,17 +30,19 @@ Tensorflow implementation of the paper for adapting semantic segmentation from t
 
 	```	
 	cd fcns-wild
-	sh scripts/download.sh
+	sh scripts/download_demo.sh
 	sh scripts/infer_city2Taipei.sh 	
 	```
 
-	The demo model is cityscapes-to-Taipei(a subset of our dataset), and results will be saved in the `./train_results/` folder. Also, it shows evaluated performance. (the evaluation code is provided by Cityscapes-dataset) 
+	The demo model is cityscapes-to-Taipei, and results will be saved in the `./train_results/` folder. Also, it shows evaluated performance. (the evaluation code is provided by Cityscapes-dataset) 
 
 
 ## Training Examples
 * Download the pretrained weights (model trained on source)
-
-* Train the Cityscapes-to-Ours{city} model 
+	```
+	sh scripts/download_src.sh
+	```
+* Train the Cityscapes-to-Ours{subset} model 
 
 	```
 	python ./src/train_adv.py \
