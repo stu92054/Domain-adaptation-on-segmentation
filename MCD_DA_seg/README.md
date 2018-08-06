@@ -29,7 +29,7 @@ Download the trained model (synthia-to-cityscapes w. dilated-ResNet @60-epoch):
 
 ```
 $ cd MCD_DA_seg  
-$ sh download.sh
+$ sh download_demo.sh
 ```
 
 ##### Infer the model: 
