@@ -11,8 +11,8 @@ We use the code provided by [https://github.com/wasidennis/AdaptSegNet](https://
 Download the fowllowing dataset and put them in the `data` folder
 
 * Download [Cityscapes Dataset](https://www.cityscapes-dataset.com/)
-* Download [Synthia Dataset]()
-* Download [Our Dataset]()
+* Download [Synthia Dataset](http://synthia-dataset.com/download-2/)
+* Download [Our Dataset](https://yihsinchen.github.io/segmentation_adaptation/#Dataset)
 	* contains four subsets --- Taipei, Tokyo, Roma, Rio --- as target domain (only testing data has annotations) 
 
 ## Testing
