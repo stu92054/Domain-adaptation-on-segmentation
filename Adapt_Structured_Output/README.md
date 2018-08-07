@@ -19,8 +19,7 @@ Download the fowllowing dataset and put them in the `data` folder
 * Download and testing [the trained model](https://drive.google.com/open?id=1MKnzjzl0aovlUH1NDK_6qw8LRB1AoZFa) and put it in the model folder
 
 * Test the model and results will be saved in the `result` folder
-```python evaluate_cityscapes.py 
---restore-from ./model/Synthia2cityscapes.pth```
+```python evaluate_cityscapes.py --restore-from ./model/Synthia2cityscapes.pth```
 
 * Compute the IoU on Cityscapes (thanks to the code from [VisDA Challenge](http://ai.bu.edu/visda-2017/))
 ```python compute_iou.py ./data/Cityscapes/data/gtFine/val result/cityscapes```
