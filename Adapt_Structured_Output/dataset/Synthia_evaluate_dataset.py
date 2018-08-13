@@ -90,7 +90,7 @@ class SynthiaDataSet(data.Dataset):
         return image.copy(), np.array(size), name
 
 if __name__ == '__main__':
-    dst = SynthiaDataSet("../../../../addhd5/nitahaha/RAND_CITYSCAPES/","./Synthia_list/train.txt")
+    dst = SynthiaDataSet("./data/synthia/RAND_CITYSCAPES/","./Synthia_list/train.txt")
     trainloader = data.DataLoader(dst, batch_size=4)
     0
     for i, data in enumerate(trainloader):

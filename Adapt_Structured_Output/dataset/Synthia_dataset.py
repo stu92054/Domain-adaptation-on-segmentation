@@ -37,7 +37,7 @@ class SynthiaDataSet(data.Dataset):
                 "label": label_file,
                 "name": name
             })
-            
+
             #
         """
         datafiles = self.files[3056]
@@ -46,7 +46,7 @@ class SynthiaDataSet(data.Dataset):
         name = datafiles["name"]
         image = np.asarray(image, np.float32)
         label = np.asarray(label, np.float32)
-        
+
         image = image.resize(self.crop_size, Image.BICUBIC)
         label = label.resize(self.crop_size, Image.NEAREST)
         image = np.asarray(image, np.float32)
@@ -90,11 +90,11 @@ class SynthiaDataSet(data.Dataset):
         return image.copy(), label_copy.copy(), np.array(size), name
 
 if __name__ == '__main__':
-    dst = SynthiaDataSet("../../../../addhd5/nitahaha/RAND_CITYSCAPES/","./Synthia_list/train.txt")
+    dst = SynthiaDataSet("./data/synthia/RAND_CITYSCAPES/","./Synthia_list/train.txt")
     trainloader = data.DataLoader(dst, batch_size=4)
     0
     for i, data in enumerate(trainloader):
-        
+
         imgs, labels, size, names = data
         #pdb.set_trace()
         if i == 0:
