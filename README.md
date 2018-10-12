@@ -15,13 +15,13 @@ Some useful Domain adaptation code
 **No More Discrimination: Cross City Adaptation of Road Scene Segmenters**
 
 - paper link: [https://arxiv.org/abs/1704.08509](https://arxiv.org/abs/1704.08509)
-- code: will be provided in Folder: Adapt_Road_Scene
+- code: will be provided in Folder: [Adapt_Road_Scene](https://github.com/stu92054/Domain-adaptation-on-segmentation/tree/master/Adapt_Road_Scene)
 
 
 **FCNs in the Wild: Pixel-level Adversarial and Constraint-based Adaptation**
 
 - paper link: [https://arxiv.org/abs/1612.02649](https://arxiv.org/abs/1612.02649)
-- code: provided in Folder: FCNs_Wild
+- code: provided in Folder: [FCNs_Wild](https://github.com/stu92054/Domain-adaptation-on-segmentation/tree/master/FCNs_Wild)
 
 **Maximum Classifier Discrepancy for Domain Adaptation with Semantic Segmentation**
 - paper link: [https://arxiv.org/abs/1712.02560](https://arxiv.org/abs/1712.02560)
