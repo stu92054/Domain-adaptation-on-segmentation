@@ -15,7 +15,7 @@ Some useful Domain adaptation code
 **No More Discrimination: Cross City Adaptation of Road Scene Segmenters**
 
 - paper link: [https://arxiv.org/abs/1704.08509](https://arxiv.org/abs/1704.08509)
-- code: will be provided in Folder: [Adapt_Road_Scene](https://github.com/stu92054/Domain-adaptation-on-segmentation/tree/master/Adapt_Road_Scene)
+- code: provided in Folder: [Adapt_Road_Scene](https://github.com/stu92054/Domain-adaptation-on-segmentation/tree/master/Adapt_Road_Scene)
 
 
 **FCNs in the Wild: Pixel-level Adversarial and Constraint-based Adaptation**
