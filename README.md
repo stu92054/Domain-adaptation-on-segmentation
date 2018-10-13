@@ -11,12 +11,12 @@ Please feel free to send me [pull requests](https://github.com/stu92054/Domain-a
 ## Table of Contents
 [Blog](https://medium.com/deep-learning-domain-adaptation-on-image-segmentat)  
 [papers](#papers)  
-[Talks](#Talks)  
-[Datasets](#Datasets)  
+[Talks](#talks)  
+[Datasets](#datasets)  
 
 
 ----------
-# Papers
+## Papers
 **Learning to Adapt Structured Output Space for Semantic Segmentation**
 
 - paper link: [https://arxiv.org/abs/1802.10349](https://arxiv.org/abs/1802.10349)
@@ -38,7 +38,8 @@ Please feel free to send me [pull requests](https://github.com/stu92054/Domain-a
 - paper link: [https://arxiv.org/abs/1712.02560](https://arxiv.org/abs/1712.02560)
 - code: provided in Folder: MCD_DA_seg
 	- main code forked from  [https://github.com/mil-tokyo/MCD_DA](https://github.com/mil-tokyo/MCD_DA)
-	
+## Talks
+
 ## Datasets 
 
 - [Synthia Dataset](http://synthia-dataset.com/download-2/) ( Download the subset **SYNTHIA-RAND-CITYSCAPES**)
