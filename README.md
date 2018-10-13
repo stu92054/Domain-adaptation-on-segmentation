@@ -4,8 +4,18 @@ Some useful Domain adaptation code
 
 > This repository collect some useful code fun others. And we will implement them in the future. So you can use them easily.
 
+## Contributing
+
+Please feel free to send me [pull requests](https://github.com/stu92054/Domain-adaptation-on-segmentation/pulls) or email (s0936100879@gmail.com) to add links.
+
+## Table of Contents
+[Blog](https://medium.com/deep-learning-domain-adaptation-on-image-segmentat)
+[papers](# Papers)
+[Talls](# Talks)
+[Datasets](# Datasets)
 
 ----------
+# Papers
 **Learning to Adapt Structured Output Space for Semantic Segmentation**
 
 - paper link: [https://arxiv.org/abs/1802.10349](https://arxiv.org/abs/1802.10349)
@@ -28,7 +38,7 @@ Some useful Domain adaptation code
 - code: provided in Folder: MCD_DA_seg
 	- main code forked from  [https://github.com/mil-tokyo/MCD_DA](https://github.com/mil-tokyo/MCD_DA)
 	
-## Dataset ##
+## Dataset 
 
 - [Synthia Dataset](http://synthia-dataset.com/download-2/) ( Download the subset **SYNTHIA-RAND-CITYSCAPES**)
 
