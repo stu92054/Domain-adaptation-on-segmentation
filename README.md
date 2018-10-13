@@ -36,12 +36,12 @@ Some useful Domain adaptation code
 - code: provided in Folder: MCD_DA_seg
 	- main code forked from  [https://github.com/mil-tokyo/MCD_DA](https://github.com/mil-tokyo/MCD_DA)
 - [tutorial Video]()
-----------
+
 ## Talks
 - [Learning to Adapt Structured Output Space for Semantic Segmentation](https://www.youtube.com/watch?v=zVYY9HaEJnc&feature=youtu.be&t=2643), Wei-Chih Hung.
 - [No More Discrimination: Cross City Adaptation of Road Scene Segmenters](https://www.youtube.com/watch?v=EQ9HptjI8_U), Yu-Ting Chen.
 - [Maximum Classifier Discrepancy for Domain Adaptation with Semantic Segmentation](https://www.youtube.com/watch?v=8mk7i3vGjAM), Kuniaki Saito.
-----------
+
 ## Datasets 
 
 - [Synthia Dataset](http://synthia-dataset.com/download-2/) ( Download the subset **SYNTHIA-RAND-CITYSCAPES**)
