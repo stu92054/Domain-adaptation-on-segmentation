@@ -10,9 +10,12 @@ Please feel free to send me [pull requests](https://github.com/stu92054/Domain-a
 
 ## Table of Contents
 [Blog](https://medium.com/deep-learning-domain-adaptation-on-image-segmentat)  
-[papers](# Papers)  
-[Talls](# Talks)  
-[Datasets](# Datasets)  
+[papers](#Papers)  
+
+[Talls](#Talks)  
+
+[Datasets](#Datasets)  
+
 
 ----------
 # Papers
