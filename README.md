@@ -9,10 +9,10 @@ Some useful Domain adaptation code
 Please feel free to send me [pull requests](https://github.com/stu92054/Domain-adaptation-on-segmentation/pulls) or email (s0936100879@gmail.com) to add links.
 
 ## Table of Contents
-[Blog](https://medium.com/deep-learning-domain-adaptation-on-image-segmentat)
-[papers](# Papers)
-[Talls](# Talks)
-[Datasets](# Datasets)
+[Blog](https://medium.com/deep-learning-domain-adaptation-on-image-segmentat)  
+[papers](# Papers)  
+[Talls](# Talks)  
+[Datasets](# Datasets)  
 
 ----------
 # Papers
@@ -38,7 +38,7 @@ Please feel free to send me [pull requests](https://github.com/stu92054/Domain-a
 - code: provided in Folder: MCD_DA_seg
 	- main code forked from  [https://github.com/mil-tokyo/MCD_DA](https://github.com/mil-tokyo/MCD_DA)
 	
-## Dataset 
+## Datasets 
 
 - [Synthia Dataset](http://synthia-dataset.com/download-2/) ( Download the subset **SYNTHIA-RAND-CITYSCAPES**)
 
