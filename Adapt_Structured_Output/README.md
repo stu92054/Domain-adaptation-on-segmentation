@@ -16,7 +16,7 @@ Download the fowllowing dataset and put them in the `data` folder
 	* contains four subsets --- Taipei, Tokyo, Roma, Rio --- as target domain (only testing data has annotations) 
 
 ## Testing
-* Download and testing [the trained model](https://drive.google.com/open?id=1MKnzjzl0aovlUH1NDK_6qw8LRB1AoZFa) and put it in the `model` folder
+* Download and testing [the trained model](https://drive.google.com/uc?export=download&confirm=z1cS&id=1MKnzjzl0aovlUH1NDK_6qw8LRB1AoZFa) and put it in the `model` folder
 
 * Test the model and results will be saved in the `result` folder
 	
