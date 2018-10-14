@@ -22,7 +22,7 @@ Tensorflow implementation of the paper for adapting semantic segmentation from t
 * Download [Cityscapes Dataset](https://www.cityscapes-dataset.com/)
 * Download [Synthia Dataset](http://synthia-dataset.com/download-2/)
 	* download the subset "SYNTHIA-RAND-CITYSCAPES" 
-* Download [Our Dataset](https://yihsinchen.github.io/segmentation_adaptation/#Dataset)
+* Download [NMD Dataset](https://yihsinchen.github.io/segmentation_adaptation/#Dataset)
 	* contains four subsets --- Taipei, Tokyo, Roma, Rio --- used as target domain (only testing data has annotations) 
 * Change the data path in files under folder "./data"
 ## Testing
@@ -31,7 +31,7 @@ Tensorflow implementation of the paper for adapting semantic segmentation from t
 	```	
 	cd fcns-wild
 	sh scripts/download_demo.sh
-	sh scripts/infer_city2Taipei.sh 	
+	sh scripts/infer_city2NMD.sh 	# This shell NMD is using Taipei
 	```
 
 	The demo model is cityscapes-to-Taipei, and results will be saved in the `./train_results/` folder. Also, it shows evaluated performance. (the evaluation code is provided by Cityscapes-dataset) 
