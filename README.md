@@ -40,7 +40,7 @@ Some useful Domain adaptation code
 ## Talks
 - [Learning to Adapt Structured Output Space for Semantic Segmentation](https://www.youtube.com/watch?v=zVYY9HaEJnc&feature=youtu.be&t=2643), Wei-Chih Hung.
 - [No More Discrimination: Cross City Adaptation of Road Scene Segmenters](https://www.youtube.com/watch?v=EQ9HptjI8_U), Yu-Ting Chen.
-- [Maximum Classifier Discrepancy for Domain Adaptation with Semantic Segmentation](https://www.youtube.com/watch?v=8mk7i3vGjAM), Kuniaki Saito.
+- [Maximum Classifier Discrepancy for Domain Adaptation with Semantic Segmentation](https://youtu.be/lNqXyJliVSo?t=2282), Kuniaki Saito.
 
 ## Datasets 
 
