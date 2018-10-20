@@ -198,7 +198,7 @@ for epoch in range(start_epoch, 40):
 
         d_loss = 0.0
         # update generator by discrepancy
-        for i in xrange(args.num_k):
+        for i in range(args.num_k):
             optimizer_g.zero_grad()
             loss = 0
             outputs = model_g(tgt_imgs)

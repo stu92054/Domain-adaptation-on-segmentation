@@ -29,7 +29,10 @@ def mkdir_if_not_exist(dirname):
 
 def yes_no_input():
     while True:
-        choice = raw_input("Please respond with 'yes' or 'no' [y/N]: ").lower()
+        if sys.version_info.major==3:
+            choice = input("Please respond with 'yes' or 'no' [y/N]: ").lower()
+        else:
+            choice = raw_input("Please respond with 'yes' or 'no' [y/N]: ").lower()
         if choice in ['y', 'ye', 'yes']:
             return True
         elif choice in ['n', 'no']:

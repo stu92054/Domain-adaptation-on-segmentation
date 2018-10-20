@@ -21,10 +21,10 @@ class BalanceLoss2d(nn.Module):
     def forward(self, inputs1, inputs2):
         prob1 = F.softmax(inputs1)[0, :19]
         prob2 = F.softmax(inputs2)[0, :19]
-        print prob1
+        print (prob1)
         prob1 = torch.mean(prob1, 0)
         prob2 = torch.mean(prob2, 0)
-        print prob1
+        print (prob1)
         entropy_loss = - torch.mean(torch.log(prob1 + 1e-6))
         entropy_loss -= torch.mean(torch.log(prob2 + 1e-6))
         return entropy_loss

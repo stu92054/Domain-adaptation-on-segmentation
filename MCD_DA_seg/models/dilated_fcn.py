@@ -18,7 +18,7 @@ import torch.nn.functional as F
 from PIL import Image
 from torchvision import transforms
 
-import drn
+import model.drn as drn
 from models.grad_reversal import grad_reverse
 
 CITYSCAPE_PALLETE = np.asarray([
